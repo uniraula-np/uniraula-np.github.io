@@ -1,0 +1,96 @@
+{
+  "questions": [
+    {
+      "text":"The following figure shows two simplified design concepts. What security architecture is shown in Model 2?",
+      "image": "chpt3-200.jpg",
+      "options": [
+        {
+          "text": "Logical segmentation",
+          "correct": false
+        },
+        {
+          "text": "Air gapped",
+          "correct": true
+        },
+        {
+          "text": "Serverless.",
+          "correct": false
+        },
+        {
+          "text": "On-premises",
+          "correct": false
+        }
+      ],
+      "explanation": "There is no connection between the two network security zones in Model 2. This is an air gapped model with physical isolation. Logical segmentation would show VLANs or other logical segmentation options. Servers are shown, easily dismissing serverless as an option, and there is no indication of whether this is an on-premises or an off-site design."
+    },
+    {
+      "text":"Tristan deploys the network device shown in the following figure. The organization’s web browsing traffic is directed through it and the traffic is filtered as described in the image. What type of network appliance is shown?",
+      "image": "chpt3-225.jpg",
+      "options": [
+        {
+          "text": "A web application firewall",
+          "correct": false
+        },
+        {
+          "text": "A proxy server",
+          "correct": true
+        },
+        {
+          "text": "A jump server",
+          "correct": false
+        },
+        {
+          "text": "A load balancer",
+          "correct": false
+        }
+      ],
+      "explanation": "The functions shown are typical of a proxy server. The proxy can be used to apply content controls and to conceal the IP addresses of internal users. A web application fire- wall filters web traffic but is specifically targeting attacks and malicious behavior. A jump server is used between a low-trust and a higher-trust area to provide access, and this is not shown or described in the image or question. A load balancer is used to distribute traffic load between servers, and this is not shown in the image or reflected in the question."
+    },
+    {
+      "text":"Brent wants to monitor traffic using an IPS. He needs to prevent attack traffic from impact- ing his datacenter and wants to minimize the amount of traffic that the IPS device has to filter. Where should he place the device to best match these requirements based on the following figure?",
+      "image": "chpt3-155.jpg",
+      "options": [
+        {
+          "text": "Position A",
+          "correct": false
+        },
+        {
+          "text": "Position B",
+          "correct": false
+        },
+        {
+          "text": "Position C",
+          "correct": false
+        },
+        {
+          "text": "Position D",
+          "correct": true
+        }
+      ],
+      "explanation": "Placing the IPS inline at position D will reduce the amount of traffic it has to filter while still allowing it to filter traffic bound for the datacenter. Points A, B, and C will all have more traffic, although point A will have the most, with reductions likely at points C and D."
+    },
+    {
+        "text":"The following graphic shows a network connection between two systems, and then a network-based attack. What type of attack is shown?",
+        "image": "chpt2-54.jpg",
+        "options": [
+          {
+            "text": "A denial-of-service attack.",
+            "correct": false
+          },
+          {
+            "text": " SQL injection attack.",
+            "correct": false
+          },
+          {
+            "text": "An on-path attack.",
+            "correct": true
+          },
+          {
+            "text": "A directory traversal attack.",
+            "correct": false
+          }
+        ],
+        "explanation": "An on-path attack redirects traffic to allow an attacker to see and potentially modify the traffic as shown in the graphic. SQL injection is accomplished by inserting SQL into web queries or application traffic, denial-of-service will target a service and no indication of that is shown, and a directory traversal attack will typically show directory manipulation like ../../."
+      }
+  ]
+}
