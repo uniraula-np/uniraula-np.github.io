@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Keep previous CSS styles -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security+ All Chapters Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .quiz-interface {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        .options {
+            margin: 15px 0;
+        }
+        .option {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover {
+            background-color: #f8f9fa;
+        }
+        .selected {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+        }
+        .correct {
+            background-color: #e8f5e9;
+            border-color: #4caf50;
+        }
+        .incorrect {
+            background-color: #ffebee;
+            border-color: #f44336;
+        }
+        .explanation {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            display: none;
+        }
+        .navigation {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1976d2;
+        }
+        #timer {
+            font-weight: bold;
+            color: #666;
+        }
+        #score {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        .header button {
+            margin-left: 10px;
+            padding: 5px 15px;
+            background-color: #dc3545;
+        }
+        .header button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <select id="chapterSelect">
+                <option value="1">Chapter 1: General Security Concepts</option>
+                <option value="2">Chapter 2: Threats & Vulnerabilities</option>
+                <option value="3">Chapter 3: Security Architecture</option>
+                <option value="4">Chapter 4: Security Operations</option>
+                <option value="5">Chapter 5: Security Program Management and Oversight</option>
+                <option value="all">All Chapters</option>
+                <!-- Add more chapters as needed -->
+            </select>
+                     
+        </div>
+             <div>
+                    <span id="timer">00:00:00</span> | 
+                    <span id="score">Score: 0/0</span>
+            </div>
+    </div>
+
+        <div id="quizContainer" style="display: none;">
+            <div class="quiz-interface">
+                <div class="question" id="questionText"></div>
+                <div class="options" id="optionsContainer"></div>
+                <div class="explanation" id="explanation"></div>
+                <div class="navigation">
+                    <button onclick="previousQuestion()">Previous</button>
+                    <button onclick="nextQuestion()">Next</button>
+                    <button onclick="submitQuiz()">Submit</button>
+                </div>
+            </div>
+        </div>
+        
+        <button onclick="startQuiz()" id="startButton">Start Quiz</button>
+    <button onclick="window.location.reload()">Reset</button>
+    </div>
+
+    <script>
+        let currentQuestionIndex = 0;
+        let questions = [];
+        let score = { correct: 0, total: 0 };
+        let timerInterval;
+        let timeElapsed = 0;
+
+        async function loadChapter(chapter) {
+            const response = await fetch(`chapter${chapter}.json`);
+            return await response.json();
+        }
+
+        async function startQuiz() {
+            const chapter = document.getElementById('chapterSelect').value;
+            document.getElementById('startButton').style.display = 'none';
+            document.getElementById('quizContainer').style.display = 'block';
+
+            let allQuestions = [];
+            
+            if (chapter === 'all') {
+                // Load all chapters
+                const chapters = await Promise.all([1, 2].map(loadChapter));
+                allQuestions = chapters.flatMap(c => c.questions);
+            } else {
+                // Load single chapter
+                const chapterData = await loadChapter(chapter);
+                allQuestions = chapterData.questions;
+            }
+
+            // Prepare questions with selection tracking
+            questions = allQuestions
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 90)
+                .map(q => ({
+                    ...q,
+                    options: q.options.map(o => ({ ...o, selected: false }))
+                }));
+
+            startTimer();
+            showQuestion(currentQuestionIndex);
+        }
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeElapsed++;
+                const hours = Math.floor(timeElapsed / 3600).toString().padStart(2, '0');
+                const minutes = Math.floor((timeElapsed % 3600) / 60).toString().padStart(2, '0');
+                const seconds = (timeElapsed % 60).toString().padStart(2, '0');
+                document.getElementById('timer').textContent = `${hours}:${minutes}:${seconds}`;
+            }, 1000);
+        }
+        function showQuestion(index) {
+            const question = questions[index];
+            const questionElem = document.getElementById('questionText');
+            const optionsContainer = document.getElementById('optionsContainer');
+            
+            // Clear previous content
+            questionElem.innerHTML = '';
+            optionsContainer.innerHTML = '';
+
+            // Add question text
+            const questionText = document.createElement('div');
+            questionText.innerHTML = `<strong>Question ${index + 1}:</strong> ${question.text}`;
+            questionElem.appendChild(questionText);
+
+            // Add image if exists
+            if (question.image) {
+                const img = document.createElement('img');
+                img.src = `images/${question.image}`;
+                img.style.maxWidth = '300px';
+                img.style.margin = '10px 0';
+                questionElem.appendChild(img);
+            }
+
+            // Add options
+            question.options.forEach((option, i) => {
+                const optionElem = document.createElement('div');
+                optionElem.className = `option ${option.selected ? 'selected' : ''}`;
+                optionElem.innerHTML = `
+                    ${String.fromCharCode(65 + i)}. ${option.text}
+                    ${option.correct && option.selected ? ' ✓' : ''}
+                `;
+                optionElem.onclick = () => handleAnswerSelection(question, i);
+                optionsContainer.appendChild(optionElem);
+            });
+
+            document.getElementById('explanation').style.display = 'none';
+            updateScore();
+        }
+        
+        // Keep other functions (handleAnswerSelection, explanation, navigation, etc.) same as previous
+        function handleAnswerSelection(question, optionIndex) {
+            question.options.forEach((o, i) => {
+                o.selected = i === optionIndex;
+            });
+            showQuestion(currentQuestionIndex);
+            showExplanation(question);
+        }
+
+        function showExplanation(question) {
+            const explanationElem = document.getElementById('explanation');
+            explanationElem.innerHTML = `<strong>Explanation:</strong> ${question.explanation}`;
+            explanationElem.style.display = 'block';
+        }
+
+        function updateScore() {
+            score.total = currentQuestionIndex + 1;
+            score.correct = questions.slice(0, currentQuestionIndex + 1)
+                .filter(q => q.options.some(o => o.correct && o.selected)).length;
+            
+            document.getElementById('score').textContent = `Score: ${score.correct}/${score.total}`;
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            const finalScore = `${score.correct}/${questions.length}`;
+            alert(`Quiz Submitted!\nFinal Score: ${finalScore}\nTime Taken: ${document.getElementById('timer').textContent}`);
+        }
+               
+    </script>
+</body>
+</html>
