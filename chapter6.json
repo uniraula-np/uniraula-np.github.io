@@ -1,0 +1,300 @@
+{
+  "questions": [
+    {
+      "text":"The following figure shows two simplified design concepts. What security architecture is shown in Model 2?",
+      "image": "chpt3-200.jpg",
+      "options": [
+        {
+          "text": "Logical segmentation",
+          "correct": false
+        },
+        {
+          "text": "Air gapped",
+          "correct": true
+        },
+        {
+          "text": "Serverless.",
+          "correct": false
+        },
+        {
+          "text": "On-premises",
+          "correct": false
+        }
+      ],
+      "explanation": "There is no connection between the two network security zones in Model 2. This is an air gapped model with physical isolation. Logical segmentation would show VLANs or other logical segmentation options. Servers are shown, easily dismissing serverless as an option, and there is no indication of whether this is an on-premises or an off-site design."
+    },
+    {
+      "text":"Tristan deploys the network device shown in the following figure. The organization’s web browsing traffic is directed through it and the traffic is filtered as described in the image. What type of network appliance is shown?",
+      "image": "chpt3-225.jpg",
+      "options": [
+        {
+          "text": "A web application firewall",
+          "correct": false
+        },
+        {
+          "text": "A proxy server",
+          "correct": true
+        },
+        {
+          "text": "A jump server",
+          "correct": false
+        },
+        {
+          "text": "A load balancer",
+          "correct": false
+        }
+      ],
+      "explanation": "The functions shown are typical of a proxy server. The proxy can be used to apply content controls and to conceal the IP addresses of internal users. A web application fire- wall filters web traffic but is specifically targeting attacks and malicious behavior. A jump server is used between a low-trust and a higher-trust area to provide access, and this is not shown or described in the image or question. A load balancer is used to distribute traffic load between servers, and this is not shown in the image or reflected in the question."
+    },
+    {
+      "text":"Brent wants to monitor traffic using an IPS. He needs to prevent attack traffic from impact- ing his datacenter and wants to minimize the amount of traffic that the IPS device has to filter. Where should he place the device to best match these requirements based on the following figure?",
+      "image": "chpt3-155.jpg",
+      "options": [
+        {
+          "text": "Position A",
+          "correct": false
+        },
+        {
+          "text": "Position B",
+          "correct": false
+        },
+        {
+          "text": "Position C",
+          "correct": false
+        },
+        {
+          "text": "Position D",
+          "correct": true
+        }
+      ],
+      "explanation": "Placing the IPS inline at position D will reduce the amount of traffic it has to filter while still allowing it to filter traffic bound for the datacenter. Points A, B, and C will all have more traffic, although point A will have the most, with reductions likely at points C and D."
+    },
+    {
+        "text":"The following graphic shows a network connection between two systems, and then a network-based attack. What type of attack is shown?",
+        "image": "chpt2-54.jpg",
+        "options": [
+          {
+            "text": "A denial-of-service attack.",
+            "correct": false
+          },
+          {
+            "text": " SQL injection attack.",
+            "correct": false
+          },
+          {
+            "text": "An on-path attack.",
+            "correct": true
+          },
+          {
+            "text": "A directory traversal attack.",
+            "correct": false
+          }
+        ],
+        "explanation": "An on-path attack redirects traffic to allow an attacker to see and potentially modify the traffic as shown in the graphic. SQL injection is accomplished by inserting SQL into web queries or application traffic, denial-of-service will target a service and no indication of that is shown, and a directory traversal attack will typically show directory manipulation like ../../."
+      },
+      {
+        "text": "The following graphic shows a report from an OpenVAS vulnerability scan. What should Charles do first to determine the best fix for the vulnerability shown?",
+        "image": "chpt4-15.jpg",
+        "options": [
+          {
+            "text": "Disable PHP- CGI.",
+            "correct": false
+          },
+          {
+            "text": "Upgrade PHP to version 5.4.",
+            "correct": false
+          },
+          {
+            "text": "Review the vulnerability descriptions in the CVEs listed.",
+            "correct": true
+          },
+          {
+            "text": "Disable the web server.",
+            "correct": false
+          }
+        ],
+        "explanation": "Although it may be tempting to immediately upgrade, reading and understanding the CVEs for a vulnerability is a good best practice. Once Charles understands the issue, he can then remediate it based on the recommendations for that specific problem. Disabling PHP or the web server would break the service, and in this case, only newer versions of PHP than 5.4!have the patch Charles needs."
+      },
+    
+      {
+        "text": "What phase of the incident response process should be placed at point A in the following image?",
+        "image": "chpt4-61,jpg",
+        "options": [
+          {
+            "text": "Simulations",
+            "correct": false
+          },
+          {
+            "text": "Review",
+            "correct": false
+          },
+          {
+            "text": "Recovery",
+            "correct": true
+          },
+          {
+            "text": "Patching",
+            "correct": false
+          }
+        ],
+        "explanation": "After eradication of the issue has been completed, recovery can begin. Recovery can include restoration of services and a return to normal operations."
+      },
+      {
+        "text": "Bob needs to block Secure Shell (SSH) traffic between two security zones. Which of the following Linux iptables firewall rules will block that traffic from the 10.0.10.0/24!network",
+        "image": "chpt4-82.jpg",
+        "options": [
+          {
+            "text": "Option A",
+            "correct": false
+          },
+          {
+            "text": "Option B",
+            "correct": false
+          },
+          {
+            "text": "Option C",
+            "correct": false
+          }
+        ],
+        "explanation": "Option D"
+      },
+      {
+        "text": "What incident response step is missing from point X in the following image?",
+        "image": "chpt4-90.jpg",
+        "options": [
+          {
+            "text": "Business continuity",
+            "correct": false
+          },
+          {
+            "text": "Containment",
+            "correct": true
+          },
+          {
+            "text": "Response",
+            "correct": false
+          },
+          {
+            "text": "Discovery",
+            "correct": false
+          }
+        ],
+        "explanation": "The Security+ exam outline talks about seven incident response process steps: Preparation, Detection, Analysis, Containment, Eradication, Recovery, and Lessons Learned."
+      },
+      {
+        "text": "Megan is reviewing her organization\u2019s datacenter network diagram as shown in the following image. What should she note for point A on the diagram?",
+        "image": "chpt4-109.jpg",
+        "options": [
+          {
+            "text": "A wireless link",
+            "correct": false
+          },
+          {
+            "text": "A redundant connection",
+            "correct": false
+          },
+          {
+            "text": "A wired link",
+            "correct": false
+          },
+          {
+            "text": "A single point of failure",
+            "correct": true
+          }
+        ],
+        "explanation": "The diagram shows a fully redundant internal network with pairs of firewalls, routers, and core switches, but with a single connection to the Internet. This means that Megan should consider how her organization would connect to the outside world if that link was severed or disrupted. There is no indication whether this is a wired or wireless link, and the image does not show a redundant link."
+      },
+      {
+        "text": "Jake is investigating a service outage and notices the following traffic using a Wireshark packet capture. Which of the following issues is most likely occurring?",
+        "image": "chpt4-112.jpg",
+        "options": [
+          {
+            "text": "An email phishing campaign",
+            "correct": false
+          },
+          {
+            "text": "A SQL injection attack",
+            "correct": false
+          },
+          {
+            "text": "A dropped network connection",
+            "correct": false
+          },
+          {
+            "text": "A denial- of- service attack",
+            "correct": true
+          }
+        ],
+        "explanation": "The packet capture shows a high volume of SYN packets, indicating a potential SYN flood, a type of denial- of- service attack. There is no information to indicate SMTP traffic for a phishing campaign, nor is there HTTP traffic for SQL injection against an application. While SYN traffic is commonly seen when a connection is lost, this traffic is repeated at a rapid pace rather than a typical reconnection attempt."
+      },
+      {
+        "text": "Nick is reviewing his system configurations and notes that logon event auditing settings on the system are set as shown in the example figure. What concern should he express about the setting?",
+        "image": "chpt4-189.jpg",
+        "options": [
+          {
+            "text": "Log files may fill up quickly.",
+            "correct": false
+          },
+          {
+            "text": "Successful authentication will not be logged.",
+            "correct": true
+          },
+          {
+            "text": "Failed authentication will not be logged.",
+            "correct": false
+          },
+          {
+            "text": "Policy may not be enforced properly.",
+            "correct": false
+          }
+        ],
+        "explanation": "Successful authentications will not be logged based on these settings. Having access to both successes and failures can be useful when investigating incidents, particularly if attackers have stolen credentials. Text-based log files take up minimal space on most work- stations and servers and should not be a significant concern. While the message notes that the policy may be overridden, Nick\u2019s primary concern should be missing log data."
+      },
+      {
+        "text": "Joe has configured ACLs on a Cisco network device. The ACL he has configured is as follows: - What does this ACL do?",
+        "image": "chpt4-199.jpg",
+        "options": [
+          {
+            "text": "Blocks HTTP traffic",
+            "correct": true
+          },
+          {
+            "text": "Blocks both HTTP and HTTPS traffic",
+            "correct": false
+          },
+          {
+            "text": "Prevents web application attacks",
+            "correct": false
+          },
+          {
+            "text": "Allows for inspection of web traffic",
+            "correct": false
+          }
+        ],
+        "explanation": "ACLs are interpreted in the order they are listed. This ACL is not properly written if it is intended to block HTTPS because the ACL order includes a rule that allows any traffic after the rule that blocks HTTP is processed. This means that traffic will first be checked to see if it is HTTP traffic. If it is not, it will be allowed, and thus will bypass the HTTPS block. It will not prevent web application attacks since HTTPS can pass the ACL, and no specific configuration is set for inspection of web traffic."
+      },
+      {
+        "text": "Donna is reviewing a script that was found on a Windows system. What does the following script do?",
+        "image": "chpt4-202.jpg",
+        "options": [
+          {
+            "text": "Stops the Windows Defender service",
+            "correct": false
+          },
+          {
+            "text": "Starts the Windows Defender service",
+            "correct": false
+          },
+          {
+            "text": "Stops and disables the Windows Defender service",
+            "correct": true
+          },
+          {
+            "text": "Enables the Windows Defender service",
+            "correct": false
+          }
+        ],
+        "explanation": "This script will stop and disable the Windows Defender service on a system with IP address 10.1.1.101. You can identify both the Stop-Service and StartupType Disabled values in the script to determine what it is likely to do. It does not start Win- dows Defender, nor does it enable the service."
+      }
+  ]
+}
